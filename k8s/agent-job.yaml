@@ -1,0 +1,27 @@
+apiVersion: platform.emergent.example/v1alpha1
+kind: AgentJob
+metadata:
+  name: invoice-parser-run-123
+  namespace: agent-workloads
+  labels:
+    app.kubernetes.io/part-of: agent-platform
+    platform.emergent.example/tenant-id: acme
+    platform.emergent.example/project-id: invoice-parser
+    platform.emergent.example/agent-run-id: run-123
+    platform.emergent.example/release: v0.1.0
+spec:
+  attempt: 1
+  ttlSecondsAfterFinished: 3600
+  execution:
+    image: registry.example.com/agent-executor:v0.1.0
+    command: ["/app/execute"]
+    resources:
+      requests:
+        cpu: "500m"
+        memory: "1Gi"
+      limits:
+        cpu: "2"
+        memory: "4Gi"
+  observability:
+    metricsLabels: [tenant_id, project_id, agent_run_id, release]
+    traceSampling: parentbased_traceidratio
