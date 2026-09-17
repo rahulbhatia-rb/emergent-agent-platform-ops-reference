@@ -1,0 +1,11 @@
+[
+  {
+    "agent_run_id": "run-123",
+    "tenant_id": "acme",
+    "project_id": "invoice-parser",
+    "cpu_seconds": 41.2,
+    "memory_gib_seconds": 88.0,
+    "input_tokens": 1200,
+    "output_tokens": 350
+  }
+]
