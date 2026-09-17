@@ -1,0 +1,42 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: agentjobs.platform.emergent.example
+spec:
+  group: platform.emergent.example
+  scope: Namespaced
+  names:
+    plural: agentjobs
+    singular: agentjob
+    kind: AgentJob
+    shortNames: [ajob]
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required: [execution]
+              properties:
+                attempt:
+                  type: integer
+                  minimum: 1
+                ttlSecondsAfterFinished:
+                  type: integer
+                  minimum: 60
+                execution:
+                  type: object
+                  required: [image]
+                  properties:
+                    image:
+                      type: string
+                    command:
+                      type: array
+                      items:
+                        type: string
+                observability:
+                  type: object
